@@ -3,14 +3,17 @@ import { Search } from "lucide-react";
 import { ProductCard } from "@/components/ProductCard";
 import { categories, products } from "@/lib/products";
 
-type ShopSearch = { q?: string; category?: string };
+type ShopSearch = { q?: string | undefined; category?: string | undefined };
 
 export const Route = createFileRoute("/shop")({
-  validateSearch: (search: Record<string, unknown>): ShopSearch => ({
-    q: typeof search.q === "string" && search.q ? search.q : undefined,
-    category:
-      typeof search.category === "string" && search.category ? search.category : undefined,
-  }),
+  validateSearch: (search: Record<string, unknown>): ShopSearch => {
+    const q = search["q"];
+    const category = search["category"];
+    return {
+      q: typeof q === "string" && q ? q : undefined,
+      category: typeof category === "string" && category ? category : undefined,
+    };
+  },
   head: () => ({
     meta: [
       { title: "Shop All Products | TECH PREMIUM" },

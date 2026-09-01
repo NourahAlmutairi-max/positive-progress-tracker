@@ -62,9 +62,9 @@ function Field({
   name: keyof Fields;
   value: string;
   onChange: (name: keyof Fields, value: string) => void;
-  error?: string;
-  type?: string;
-  optional?: boolean;
+  error?: string | undefined;
+  type?: string | undefined;
+  optional?: boolean | undefined;
 }) {
   return (
     <div className="min-w-0">
