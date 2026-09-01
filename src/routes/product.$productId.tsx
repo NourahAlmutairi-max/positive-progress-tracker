@@ -52,7 +52,7 @@ function ProductPage() {
         <span>/</span>
         <Link
           to="/shop"
-          search={{ category: product.category, q: undefined }}
+          search={{ category: product.category }}
           className="hover:text-primary"
         >
           {product.category}

@@ -39,7 +39,7 @@ function Categories() {
             <Link
               key={c}
               to="/shop"
-              search={{ category: c, q: undefined }}
+              search={{ category: c }}
               className="group overflow-hidden rounded-xl border border-border bg-card transition-shadow hover:shadow-lg"
             >
               <div className="aspect-16/9 overflow-hidden bg-secondary">

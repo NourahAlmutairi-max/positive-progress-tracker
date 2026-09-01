@@ -4,7 +4,7 @@ import { products, type Product } from "./products";
 export type CartItem = {
   id: string;
   productId: string;
-  option?: string;
+  option?: string | undefined;
   quantity: number;
 };
 

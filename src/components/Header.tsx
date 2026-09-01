@@ -19,7 +19,7 @@ export function Header() {
   const submitSearch = (e: React.FormEvent) => {
     e.preventDefault();
     setOpen(false);
-    navigate({ to: "/shop", search: { q: query.trim() || undefined, category: undefined } });
+    navigate({ to: "/shop", search: { q: query.trim() || undefined } });
   };
 
   return (
