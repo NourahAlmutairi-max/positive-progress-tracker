@@ -6,7 +6,10 @@ import { categories, heroSetup, products } from "@/lib/products";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "TECH PREMIUM | Premium Keyboards, Mice & Desk Setup Gear" },
+      {
+        title:
+          "TECH PREMIUM | Premium Keyboards, Mice & Desk Setup Gear",
+      },
       {
         name: "description",
         content:
@@ -29,6 +32,7 @@ export const Route = createFileRoute("/")({
 function Home() {
   const [active, setActive] = useState<string>("All");
 
+  // AI Setup Assistant
   const [goal, setGoal] = useState("");
   const [model, setModel] = useState("openrouter/free");
   const [advice, setAdvice] = useState("");
@@ -42,6 +46,7 @@ function Home() {
       : products.filter((p) => p.category === active);
 
   async function getRecommendation() {
+    // Empty field error handling
     if (!goal.trim()) {
       setError("Please tell us what kind of setup you need.");
       setAdvice("");
@@ -69,7 +74,10 @@ function Home() {
       const data = await response.json();
 
       if (!response.ok) {
-        throw new Error(data.error || "Something went wrong.");
+        throw new Error(
+          data.error ||
+            "The AI service is unavailable. Please try again.",
+        );
       }
 
       setAdvice(data.advice);
@@ -87,6 +95,7 @@ function Home() {
 
   return (
     <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6">
+      {/* HERO */}
       <section className="grid items-center gap-8 rounded-2xl bg-secondary/60 p-6 sm:p-10 lg:grid-cols-2 lg:gap-12">
         <div>
           <h1 className="text-4xl font-extrabold leading-tight tracking-tight text-foreground sm:text-5xl">
@@ -96,8 +105,8 @@ function Home() {
           </h1>
 
           <p className="mt-4 max-w-md text-sm text-muted-foreground sm:text-base">
-            Smart tech essentials designed for studying, coding, and everyday
-            productivity.
+            Smart tech essentials designed for studying, coding, and
+            everyday productivity.
           </p>
 
           <div className="mt-6 flex flex-wrap gap-3">
@@ -128,6 +137,7 @@ function Home() {
         </div>
       </section>
 
+      {/* AI SETUP ASSISTANT */}
       <section className="mt-10 rounded-2xl border border-border bg-background p-5 sm:p-8">
         <div className="mx-auto max-w-3xl">
           <p className="text-xs font-semibold uppercase tracking-wider text-primary">
@@ -139,11 +149,12 @@ function Home() {
           </h2>
 
           <p className="mt-2 text-sm text-muted-foreground">
-            Tell us what you need and our AI assistant will combine live API
-            data with AI to suggest a practical setup.
+            Tell us what you need and our AI assistant will combine
+            live API data with AI to suggest a practical setup.
           </p>
 
           <div className="mt-6 grid gap-4 sm:grid-cols-2">
+            {/* USER INPUT */}
             <div className="sm:col-span-2">
               <label
                 htmlFor="goal"
@@ -162,6 +173,7 @@ function Home() {
               />
             </div>
 
+            {/* MODEL SELECTION */}
             <div>
               <label
                 htmlFor="model"
@@ -180,12 +192,13 @@ function Home() {
                   OpenRouter Free Router
                 </option>
 
-                <option value="meta-llama/llama-3.3-70b-instruct:free">
-                  Llama 3.3 70B Free
+                <option value="nvidia/nemotron-3-ultra-550b-a55b:free">
+                  Nemotron 3 Ultra Free
                 </option>
               </select>
             </div>
 
+            {/* BUTTON */}
             <div className="flex items-end">
               <button
                 type="button"
@@ -200,18 +213,21 @@ function Home() {
             </div>
           </div>
 
+          {/* LOADING STATE */}
           {loading && (
             <div className="mt-5 rounded-lg border border-border bg-secondary/40 p-4 text-sm text-muted-foreground">
               Loading live data and generating your AI recommendation...
             </div>
           )}
 
+          {/* ERROR MESSAGE */}
           {error && (
             <div className="mt-5 rounded-lg border border-red-300 bg-red-50 p-4 text-sm text-red-700">
               {error}
             </div>
           )}
 
+          {/* NORMAL API RESULT */}
           {advice && (
             <div className="mt-6 rounded-xl border border-border bg-secondary/40 p-5">
               <h3 className="font-semibold text-foreground">
@@ -224,6 +240,7 @@ function Home() {
             </div>
           )}
 
+          {/* AI RESULT */}
           {recommendation && (
             <div className="mt-4 rounded-xl border border-primary/30 bg-primary/5 p-5">
               <h3 className="font-semibold text-foreground">
@@ -238,6 +255,7 @@ function Home() {
         </div>
       </section>
 
+      {/* PRODUCT CATEGORIES */}
       <section className="mt-10">
         <div className="flex flex-wrap gap-2">
           {categories.map((c) => (
@@ -257,6 +275,7 @@ function Home() {
           ))}
         </div>
 
+        {/* PRODUCTS */}
         <div className="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {shown.map((p) => (
             <ProductCard key={p.id} product={p} />
