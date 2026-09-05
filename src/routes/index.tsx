@@ -30,7 +30,7 @@ function Home() {
   const [active, setActive] = useState<string>("All");
 
   const [goal, setGoal] = useState("");
-  const [model, setModel] = useState("openrouter/free");
+  const [model, setModel] = useState("google/gemma-3-27b-it:free");
   const [advice, setAdvice] = useState("");
   const [recommendation, setRecommendation] = useState("");
   const [error, setError] = useState("");
@@ -176,12 +176,12 @@ function Home() {
                 onChange={(e) => setModel(e.target.value)}
                 className="w-full rounded-lg border border-border bg-background px-4 py-3 text-sm text-foreground outline-none transition focus:border-primary"
               >
-                <option value="openrouter/free">
-                  OpenRouter Free Router
+                <option value="google/gemma-3-27b-it:free">
+                  Gemma 3 27B Free
                 </option>
 
-                <option value="meta-llama/llama-3.2-3b-instruct:free">
-                  Llama 3.2 Free
+                <option value="openrouter/free">
+                  OpenRouter Free Router
                 </option>
               </select>
             </div>
